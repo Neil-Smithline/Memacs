@@ -5,14 +5,14 @@
 
 ** Data Source
 
-[[http://en.wikipedia.org/wiki/Revision_control][Version control systems]] are quite common to manage all kind of data
-with. [[http://en.wikipedia.org/wiki/Git_(software)][git]] is a modern distributed system that has an enormous feature
+[[http://en.wikipedia.org/wiki/Revision_control][Version control systems]] are quite commonly used to manage all kind of 
+data. [[http://en.wikipedia.org/wiki/Git_(software)][git]] is a modern distributed VCSthat has an enormous feature
 set.
 
 memacs_git.py parses the output of:
 : git rev-list --all --pretty=raw
 
-If a outfile is specified, only new commits are appended.
+If an outfile is specified that already contains data, only new commits are appended.
 
 ** Example Invocation
 *** Example with rev-list file:
@@ -24,7 +24,7 @@ Every 60 minutes try to fetch something new from git repository and parse output
 
 : ORG_DIR="/home/user/orgmode/memacs"
 : MEMACS_DIR="/home/user/git/Memacs"
-: */60   *   *   *  *    /home/user/bin/no-power-supply.sh || cd "/home/user/git/Memacs" && git fetch && git rev-list --all --pretty=raw | $MEMACS_DIR/versioning_systems/memacs_git.py -o $ORG_DIR/git-memacs.org_archive
+: */60   *   *   *  *    /home/user/bin/no-power-supply.sh || cd "$MEMACS_DIR" && git fetch && git rev-list --all --pretty=raw | $MEMACS_DIR/versioning_systems/memacs_git.py -o $ORG_DIR/git-memacs.org_archive
 
 *** .gitconfig - alias
 For easily adding a crontab entry, you can modify your .gitconfig and 
@@ -38,9 +38,9 @@ It could look like this: (adjust the paths!)
 	
 *** filter by username 
 use option 
-: ./memacs_git.py <...> -g "Forename Lastname"
+: ./memacs_git.py <...> -g "Firstname Lastname"
 or 
-: ./memacs_git.py <...> --grep-user "Forename Lastname"
+: ./memacs_git.py <...> --grep-user "Firstname Lastname"
 ** Example Orgmode entries
 
 Whenever user "Bob" commits a change set to an example project,
